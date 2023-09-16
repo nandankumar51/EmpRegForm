@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Delete Employee Details</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color: #A9C9FF;
+            background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
+
+        }
+
+
+        h2 {
+            padding-top: 30px;
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        .CenterForm {
+            padding: 10px;
+            margin: 10px;
+            width: 500px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+
+
+        }
+
+        #EmployeeId {
+            height: 30px;
+            width: 250px;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #show {
+            width: 200px;
+            height: 30px;
+            border: 2px solid;
+            background: #2691d9;
+            border-radius: 25px;
+            font-size: 20px;
+            color: #e9f4fb;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+            position: absolute;
+            top: 100%;
+            left: 40%;
+            transform: translate(-50%, 50%);
+
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <h2> Delete Employee Data</h2>
+    <div class="CenterForm">
+        <label for="EmployeeId">Employee Id: </label>
+        <input id="EmployeeId" maxlength="50" name="EmployeeId" type="text" placeholder="Enter Employee Id" />
+        <div class="showbutton">
+            <input type="submit" value="Delete Employee" id="show" onclick="deleteData();" />
+
+        </div>
+
+    </div>
+
+
+    <script>
+        $("#EmployeeId").focus();
+        function validateAndGetFormData() {
+            var empIdVar = $("#EmployeeId").val();
+            if (empIdVar === "") {
+                alert("Employee ID Required Value");
+                $("#EmployeeId").focus();
+                return "";
+            }
+
+            var jsonStrObj = {
+                empId: empIdVar,
+            };
+            return JSON.stringify(jsonStrObj);
+        }
+
+
+        function executeCommand(reqString, dbBaseUrl, apiEndPointUrl) {
+            var url = dbBaseUrl + apiEndPointUrl;
+            var jsonObj;
+            $.post(url, reqString, function (result) {
+                jsonObj = JSON.parse(result);
+            }).fail(function (result) {
+                var dataJsonObj = result.responseText;
+                jsonObj = JSON.parse(dataJsonObj);
+            });
+            return jsonObj;
+        }
+        function resetForm() {
+            $("#EmployeeId").val("")
+            $("#EmployeeId").focus();
+        }
+        function createREMOVERecordRequest(token, dbName, relName, reqId) {
+            var req = "{\n"
+                + "\"token\" : \""
+                + token
+                + "\","
+                + "\"dbName\": \""
+                + dbName
+                + "\",\n" + "\"cmd\" : \"REMOVE\",\n"
+                + "\"rel\" : \""
+                + relName
+                + "\",\n" + "\"record\":"
+                + reqId
+                + "\n"
+                + "}";
+            return req;
+        }
+        function deleteData() {
+            var token = "90936277|-31948850870665131|90945352";
+            var dbname = "SAMPLE";
+            var relationName = "EMP-REL";
+            var empId = $("#EmployeeId").val();
+
+            var reqString = createREMOVERecordRequest(token, dbname, relationName, empId);
+            alert(reqString);
+            jQuery.ajaxSetup({ async: false });
+            var resultObj = executeCommand(reqString, "http://api.login2explore.com:5577", "/api/iml");
+            jQuery.ajaxSetup({ async: true });
+            alert(JSON.stringify(resultObj));
+            alert("Your Data Deleted");
+            resetForm();
+        }
+
+    </script>
+</body>
+</html>
