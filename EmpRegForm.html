@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            background-color: #A9C9FF;
+            background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
+
+        }
+
+        .CenterForm {
+            padding: 10px;
+            margin: 10px;
+            width: 500px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+
+
+        }
+
+        h2 {
+            padding-top: 30px;
+            font-size: 3rem;
+            text-align: center;
+        }
+
+        #EmployeeId {
+            height: 30px;
+            width: 250px;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #Empname {
+            height: 30px;
+            width: 250px;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #Email {
+            height: 30px;
+            width: 250px;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #Mobile {
+            height: 30px;
+            width: 250px;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #Companay {
+            height: 30px;
+            width: 250px;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #Experience {
+            height: 30px;
+            width: 250px;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #Projects {
+            height: 30px;
+            width: 250px;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #Message {
+            height: 100px;
+            width: 250px;
+            border: 2px solid black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #Register {
+            width: 285%;
+            height: 35px;
+            border: 2px solid;
+            background: #2691d9;
+            border-radius: 25px;
+            font-size: 20px;
+            color: #e9f4fb;
+            font-weight: 700;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #Register:hover {
+            border-color: #2691d9;
+            transition: .5s;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <h2>Employee Registration</h2>
+    <div class="CenterForm">
+        <form action="" method="post">
+            <table>
+                <tr>
+                    <td><label for="EmployeeId">Employee Id: </label></td>
+                    <td><input id="EmployeeId" maxlength="50" name="EmployeeId" type="text" placeholder="Employee Id" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="Empname">Full Name: </label></td>
+                    <td><input id="Empname" maxlength="50" name="Empname" type="text" placeholder="Full Name" /></td>
+                </tr>
+                <tr>
+                    <td><label for="Email">Email: </label></td>
+                    <td><input id="Email" name="Email" type="email" placeholder="Email" /></td>
+                </tr>
+                <tr>
+                    <td><label for="Mobile">Mobile No.: </label></td>
+                    <td><input id="Mobile" maxlength="10" name="Mobile" type="tel" placeholder="Mobile" /></td>
+                </tr>
+
+                <tr>
+                    <td><label for="Companay">Companay Name: </label></td>
+                    <td><input id="Companay" maxlength="50" name="Companay" type="text" placeholder="Companay" /></td>
+                </tr>
+                <tr>
+                    <td><label for="Experience">Experience: </label></td>
+                    <td><input id="Experience" name="Experience" type="number" placeholder="Experience" /></td>
+                </tr>
+                <tr>
+                    <td><label for="Projects">Your Projects: </label></td>
+                    <td><input id="Projects" name="Projects" type="text" placeholder="Projects" /></td>
+                </tr>
+                <tr>
+                    <td><label for="Message">Message: </label></td>
+                    <td> <textarea name="Message" id="Message" cols="20" rows="5"
+                            placeholder="About your project"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Register" id="Register" onclick="RegisterEmployee();" /></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+    <script>
+        $("#EmployeeId").focus();
+        function validateAndGetFormData() {
+            var empIdVar = $("#EmployeeId").val();
+            if (empIdVar === "") {
+                alert("Employee ID Required Value");
+                $("#EmployeeId").focus();
+                return "";
+            }
+            var empNameVar = $("#Empname").val();
+            if (empNameVar === "") {
+                alert("Employee Name is Required Value");
+                $("#Empname").focus();
+                return "";
+            }
+            var empEmailVar = $("#Email").val();
+            if (empEmailVar === "") {
+                alert("Employee Email is Required Value");
+                $("#Email").focus();
+                return "";
+            }
+            var empMobVar = $("#Mobile").val();
+            if (empMobVar === "") {
+                alert("Mobile No. is Required Value");
+                $("#Mobile").focus();
+                return "";
+            }
+            var empCompVar = $("#Companay").val();
+            if (empCompVar === "") {
+                alert("Employee Companay is Required Value");
+                $("#Companay").focus();
+                return "";
+            }
+            var empExpVar = $("#Experience").val();
+            if (empExpVar === "") {
+                alert("Employee Experience is Required Value");
+                $("#Experience").focus();
+                return "";
+            }
+            var empProjVar = $("#Projects").val();
+            if (empProjVar === "") {
+                alert("Employee Projects is Required Value");
+                $("#Projects").focus();
+                return "";
+            }
+            var empMessVar = $("#Message").val();
+            if (empMessVar === "") {
+                alert("Message is Required Value");
+                $("#Message").focus();
+                return "";
+            }
+            var jsonStrObj = {
+                empId: empIdVar,
+                empName: empNameVar,
+                empEmail: empEmailVar,
+                Mobile: empMobVar,
+                Companay: empCompVar,
+                Experience: empExpVar,
+                Projects: empProjVar,
+                Message: empMessVar,
+            };
+            return JSON.stringify(jsonStrObj);
+        }
+        function createPUTRequest(connToken, jsonObj, dbName, relName) {
+            var putRequest = "{\n"
+                + "\"token\" : \""
+                + connToken
+                + "\","
+                + "\"dbName\": \""
+                + dbName
+                + "\",\n" + "\"cmd\" : \"PUT\",\n"
+                + "\"rel\" : \""
+                + relName + "\","
+                + "\"jsonStr\": \n"
+                + jsonObj
+                + "\n"
+                + "}";
+            return putRequest;
+        }
+        function executeCommand(reqString, dbBaseUrl, apiEndPointUrl) {
+            var url = dbBaseUrl + apiEndPointUrl;
+            var jsonObj;
+            $.post(url, reqString, function (result) {
+                jsonObj = JSON.parse(result);
+            }).fail(function (result) {
+                var dataJsonObj = result.responseText;
+                jsonObj = JSON.parse(dataJsonObj);
+            });
+            return jsonObj;
+        }
+        function resetForm() {
+            $("#EmployeeId").val("")
+            $("#Empname").val("");
+            $("#Email").val("");
+            $("#Mobile").val("")
+            $("#Companay").val("");
+            $("#Experience").val("");
+            $("#Projects").val("");
+            $("#Message").val("");
+            $("#EmployeeId").focus();
+        }
+
+        function RegisterEmployee() {
+            var jsonStr = validateAndGetFormData();
+            if (jsonStr === "") {
+                return;
+            }
+            var putReqStr = createPUTRequest("90936277|-31948850870665131|90945352",
+                jsonStr, "SAMPLE", "EMP-REL");
+            alert(putReqStr);
+            jQuery.ajaxSetup({ async: false });
+            var resultObj = executeCommand(putReqStr,
+                "http://api.login2explore.com:5577", "/api/iml");
+            // alert(JSON.stringify(resultObj));
+            jQuery.ajaxSetup({ async: true });
+            alert( "INSERTED "+JSON.stringify(resultObj));
+            resetForm();
+        }
+    </script>
+
+</body>
+
+</html>
